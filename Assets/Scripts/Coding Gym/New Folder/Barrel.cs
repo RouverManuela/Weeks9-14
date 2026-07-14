@@ -3,7 +3,10 @@ using UnityEngine.InputSystem;
 
 public class Barrel : MonoBehaviour
 {
-   private Vector3 rotationDirection = Vector3.zero;
+    //public Vector3 lookRotate = Vector3.zero;
+    public float rotateSpeed;
+    Vector2 look;
+
     //Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -13,13 +16,12 @@ public class Barrel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       transform.up += (Vector3)rotationDirection * Time.deltaTime;
+      transform.right = look * rotateSpeed * Time.deltaTime;
     }
 
     public void OnRotate(InputAction.CallbackContext context)
     {
-        Vector2 look = context.ReadValue<Vector2>();
-
-        transform.up = look;
+       // transform.right = context.ReadValue<Vector2>();
+       look = context.action.ReadValue<Vector2>();
     }
 }
